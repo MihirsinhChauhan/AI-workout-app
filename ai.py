@@ -12,18 +12,17 @@ FLOW_ID = "4cf128db-61c5-45ea-8695-3922a57bbbeb"
 
 
 def ask_ai(question, profile):
+    
     TWEAKS = {
     "TextInput-YGbVg": {
-        "input_value": "question"
+        "input_value": question
     },
-    
     "TextInput-zaT4t": {
-        "input_value": "profile"
-    },
-    
+        "input_value": profile
+    }
     }
 
-    result = run_flow_from_json(flow="workflows/Ask AI.json",
+    result = run_flow_from_json(flow="Ask AI.json",
                                 input_value="message",
                                 session_id="", # provide a session id if you want to use session state
                                 fallback_to_env_vars=True, # False by default
@@ -70,8 +69,8 @@ def run_flow(message: str,
     return response.json()["outputs"][0]["outputs"][0]["results"]["text"]["data"]["text"]
 
 
-result = get_macros("height: 196 cm, weight: 81 kg, gender: male, very active", "gain muscles and loose belly fat ")
+# result = get_macros("height: 196 cm, weight: 81 kg, gender: male, very active", "gain muscles and loose belly fat ")
 result2 = ask_ai("Make personalised plan for me based on my profile and goals",
                  "height: 196 cm, weight: 81 kg, gender: male, very active, goals: gain muscles and loose belly fat ")
-print(result)
+# print(result)
 print(result2)
